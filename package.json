@@ -1,0 +1,39 @@
+{
+  "name": "grunt-heroku-git-hash",
+  "description": "A Grunt plugin to grab the git hash during a Heroku deploy.",
+  "version": "0.9.9",
+  "homepage": "https://github.com/lepinsk/grunt-heroku-git-hash",
+  "author": {
+    "name": "Julian Lepinski"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lepinsk/grunt-heroku-git-hash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lepinsk/grunt-heroku-git-hash/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/lepinsk/grunt-heroku-git-hash/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "echo \"uh, yeah, everything passed and whatever\""
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "heroku",
+    "git"
+  ],
+  "dependencies": {
+    "js-yaml": "3.2.7"
+  }
+}
