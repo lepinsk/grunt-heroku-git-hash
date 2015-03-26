@@ -1,5 +1,5 @@
 // grunt-heroku-git-hash
-// tasks/heroku_git_hash.js
+// tasks/heroku-git-hash.js
 //
 // Copyright (c) 2015 Julian Lepinski
 // Licensed under the MIT license.
