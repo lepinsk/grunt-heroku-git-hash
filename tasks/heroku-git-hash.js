@@ -18,8 +18,18 @@ module.exports = function(grunt) {
 			var filePath = "/app/tmp/push_metadata.yml";
 
 			var pushMetadata = yaml.safeLoad(fs.readFileSync(filePath, "utf8"));
-			var hashLong = pushMetadata.source_blob.version;
-			grunt.config.set("githash", hashLong);
+			
+			if (pushMetadata.source_blob && pushMetadata.source_blob.version){
+				
+				var hashLong = pushMetadata.source_blob.version;
+				grunt.config.set("githash", hashLong);
+			
+			} else {
+
+				var issueURL = "https://github.com/lepinsk/grunt-heroku-git-hash/issues/1";
+				grunt.fail.warn("heroku-git-hash; push_metadata missing expected fields. see " + issueURL);
+
+			}
 
 		} catch (e) {
 

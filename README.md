@@ -13,7 +13,7 @@ Grunt can be used to automate post-install processes – for example, following 
 ##### N.B., tho:
 
 * This plugin is meant for use *on Heroku, during the build process* and will not retrieve a hash on your local machine. If you're looking for that, might I suggest [grunt-githash](https://www.npmjs.com/package/grunt-githash).
-* This plugin has been tested on Heroku's new ```cedar-14``` stack, however it depends on undocumented parts of the internal slug building process and could stop working at some future date. It doesn't appear to work properly on Heroku's now-deprecated ```cedar-10``` stack.
+* This plugin has been tested on Heroku's ```cedar-10``` (now-deprecated) and ```cedar-14``` stacks with success on both. There's a [known issue](#known-issues) where this plugin won't work on some deploys, which is under investigation.
 
 ### Usage Examples
 
@@ -80,8 +80,13 @@ module.exports = function(grunt) {
 };
 ```
 
+## Known Issues
+
+* [#1](https://github.com/lepinsk/grunt-heroku-git-hash/issues/1) **hash unavailable on some heroku deploys**: in certain cases, heroku's ```push_metadata.yml``` is missing the field that this plugin uses to lookup the hash value. **grunt-heroku-git-hash** will throw an error informing you if this is the case.
+
 ## Release History
 
+* **v1.0.2** – March 26, 2015; revising documented issue, improving error messages in that case
 * **v1.0.1** – March 25, 2015; documenting an issue on cedar-10
 * **v1.0.0** – March 25, 2015; first public release
 * **v0.9.9** – March 25, 2015; preparing for release.
