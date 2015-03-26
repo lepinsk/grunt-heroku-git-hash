@@ -1,18 +1,25 @@
 # grunt-heroku-git-hash
 
-A Grunt plugin to retrieve the current Git Hash value during a Heroku build.
+A Grunt plugin to retrieve the current Git hash value during a Heroku build.
 
 ## Getting Started
 
 This plugin has no configuration options, and contains a single task: ```heroku-git-hash```. When run, the task retrieves and sets the current deploy's hash value under the ```githash``` config property. **grunt-heroku-git-hash** throws a warning (which will halt Grunt) if it is unable to parse the git hash value.
 
-**N.B.** This plugin is meant for use *on Heroku, during the build process* and will not retrieve a hash on your local machine. If you're looking for that, might I suggest [grunt-githash](https://www.npmjs.com/package/grunt-githash).
+##### Why?
+
+Grunt can be used to automate post-install processes – for example, following a deploy to Heroku, you may wish to minify your hosted javascript files and upload the minification map files to some secure location. In any case, you may find it useful to have available your deploy's Git hash (perhaps to file your uploaded map files, or to make available inside your application's environment), however Heroku doesn't make this valuable accessible during the slug building process or to the running slug. **grunt-heroku-git-hash** extracts this value from the environment and makes it available to other Grunt tasks.
+
+##### N.B., tho:
+
+* This plugin is meant for use *on Heroku, during the build process* and will not retrieve a hash on your local machine. If you're looking for that, might I suggest [grunt-githash](https://www.npmjs.com/package/grunt-githash).
+* This plugin has been tested on Heroku's now-deprecated ```cedar``` stack (also known as ```cedar-10```), as well as Heroku's new ```cedar-14``` stack, however it depends on undocumented parts of the internal slug building process and could stop working at some future date.
 
 ### Usage Examples
 
 #### A trivial example 
 
-Here we make use of **grunt-heroku-git-hash** to retrieve the git hash of a deploy and print it to the console.
+Here we make use of **grunt-heroku-git-hash** to retrieve the Git hash of a deploy and print it to the console.
 
 **Gruntfile.js:**
 ```js
@@ -36,7 +43,7 @@ module.exports = function(grunt) {
 
 #### A more reasonable example
 
-Here we'll use **grunt-heroku-git-hash** to write the current deploy's git hash into the banner at the top of our uglified JS.
+Here we'll use **grunt-heroku-git-hash** to write the current deploy's Git hash into the banner at the top of our uglified JS.
 
 **Gruntfile.js:**
 ```js
@@ -44,13 +51,13 @@ module.exports = function(grunt) {
 
   // we'll configure uglify to turn every *.js file in static/js into a .min.js file
   // with a banner at the top of each that will have the package name,
-  // and the project's current git version
+  // and the project's current Git version
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %>, version: <%= githash %> */\n'
+        banner: '// <%= pkg.name %>, version: <%= githash %> \n'
       },
       build: {
         files: [{
@@ -75,8 +82,9 @@ module.exports = function(grunt) {
 
 ## Release History
 
+* **v1.0.0** – March 25, 2015; first public release
 * **v0.9.9** – March 25, 2015; preparing for release.
 
 ## License
 
-grunt-heroku-git-hash is MIT-Licensed. For more info, see the LICENSE file at the root of this project.
+**grunt-heroku-git-hash** is MIT-Licensed. For more info, see the LICENSE file at the root of this project.

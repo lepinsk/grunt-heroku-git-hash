@@ -8,10 +8,13 @@ var yaml = require("js-yaml");
 var fs   = require("fs");
 
 module.exports = function(grunt) {
-	grunt.registerTask('heroku-git-hash', "Retrive the current git hash on a Heroku deploy", function(){
+	grunt.registerTask('heroku-git-hash', "Retrive the current Git hash on a Heroku deploy", function(){
 
 		try {
 
+			// born too late to explore the earth
+			// born too soon to explore the galaxy
+			// born just in time to BROWSE DANK FILESYSTEMS
 			var filePath = "/app/tmp/push_metadata.yml";
 
 			var pushMetadata = yaml.safeLoad(fs.readFileSync(filePath, "utf8"));
@@ -20,7 +23,7 @@ module.exports = function(grunt) {
 
 		} catch (e) {
 
-			grunt.error.warn("error parsing yaml (grunt.config githash value will be undefined): " + e);
+			grunt.fail.warn("heroku-git-hash; error parsing yaml: " + e);
 
 		}
 	});
